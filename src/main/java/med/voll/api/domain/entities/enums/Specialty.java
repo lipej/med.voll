@@ -1,4 +1,4 @@
-package med.voll.api.domain.usecases.inputs;
+package med.voll.api.domain.entities.enums;
 
 public enum Specialty {
     ORTOPEDIA,
