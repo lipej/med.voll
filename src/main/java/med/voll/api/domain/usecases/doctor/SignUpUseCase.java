@@ -1,16 +1,12 @@
 package med.voll.api.domain.usecases.doctor;
 
-import med.voll.api.domain.entities.Address;
 import med.voll.api.domain.entities.Doctor;
-import med.voll.api.domain.entities.enums.Specialty;
 import med.voll.api.domain.repositories.DoctorRepository;
 import med.voll.api.domain.usecases.BaseUseCase;
-import med.voll.api.domain.usecases.inputs.doctor.SingUpInput;
-import med.voll.api.domain.usecases.output.IdOutput;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SignUpUseCase implements BaseUseCase<SingUpInput, IdOutput> {
+public class SignUpUseCase implements BaseUseCase<Doctor, String> {
     private final DoctorRepository doctorRepository;
 
     private SignUpUseCase(DoctorRepository doctorRepository) {
@@ -18,22 +14,7 @@ public class SignUpUseCase implements BaseUseCase<SingUpInput, IdOutput> {
     }
 
     @Override
-    public IdOutput execute(SingUpInput input) {
-
-        Doctor doctor = new Doctor(
-                input.name(),
-                input.email(),
-                input.crm(),
-                Specialty.valueOf(input.specialty().toString()),
-                new Address(
-                        input.address().street(),
-                        input.address().neighborhood(),
-                        input.address().zip(),
-                        input.address().city(),
-                        input.address().state(),
-                        input.address().number(),
-                        input.address().complement()));
-
-        return new IdOutput(this.doctorRepository.create(doctor).getId().toString());
+    public String execute(Doctor input) {
+        return this.doctorRepository.create(input).getId().toString();
     }
 }

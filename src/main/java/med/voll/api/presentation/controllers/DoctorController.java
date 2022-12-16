@@ -1,8 +1,11 @@
 package med.voll.api.presentation.controllers;
 
+import med.voll.api.domain.entities.Address;
+import med.voll.api.domain.entities.Doctor;
+import med.voll.api.domain.entities.enums.Specialty;
 import med.voll.api.domain.usecases.doctor.SignUpUseCase;
-import med.voll.api.domain.usecases.inputs.doctor.SingUpInput;
-import med.voll.api.domain.usecases.output.IdOutput;
+import med.voll.api.presentation.controllers.inputs.doctor.*;
+import med.voll.api.presentation.controllers.output.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,20 @@ public class DoctorController {
 
     @PostMapping
     public IdOutput signup(@RequestBody SingUpInput input) {
-        return this.signUpUseCase.execute(input);
+        Doctor doctor = new Doctor(
+                input.name(),
+                input.email(),
+                input.crm(),
+                Specialty.valueOf(input.specialty().toString()),
+                new Address(
+                        input.address().street(),
+                        input.address().neighborhood(),
+                        input.address().zip(),
+                        input.address().city(),
+                        input.address().state(),
+                        input.address().number(),
+                        input.address().complement()));
+
+        return new IdOutput(this.signUpUseCase.execute(doctor));
     }
 }
