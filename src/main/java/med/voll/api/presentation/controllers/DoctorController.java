@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("doctors")
 public class DoctorController {
@@ -22,7 +24,7 @@ public class DoctorController {
     }
 
     @PostMapping
-    public IdOutput signup(@RequestBody SingUpInput input) {
+    public IdOutput signup(@Valid @RequestBody SingUpInput input) {
         Doctor doctor = new Doctor(
                 input.name(),
                 input.email(),
