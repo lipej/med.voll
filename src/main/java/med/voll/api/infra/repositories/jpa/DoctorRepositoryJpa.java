@@ -20,6 +20,7 @@ public class DoctorRepositoryJpa implements DoctorRepository {
     public Doctor create(Doctor entity) {
         DoctorModel saved = this.doctorRepo.save(new DoctorModel(entity));
 
+
         return this.toEntity(saved);
     }
 
