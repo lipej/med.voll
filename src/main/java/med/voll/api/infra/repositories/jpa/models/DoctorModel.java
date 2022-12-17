@@ -20,6 +20,7 @@ public class DoctorModel {
     private String id;
     private String name;
     private String email;
+    private String phone;
     private String crm;
 
     @Enumerated(EnumType.STRING)
@@ -32,6 +33,7 @@ public class DoctorModel {
         this.id = data.getId().toString();
         this.name = data.getName();
         this.email = data.getEmail();
+        this.phone = data.getPhone();
         this.crm = data.getCrm();
         this.specialty = data.getSpecialty();
         this.address = new AddressModel(data.getAddress());

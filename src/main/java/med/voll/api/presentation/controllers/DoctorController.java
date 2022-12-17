@@ -28,6 +28,7 @@ public class DoctorController {
         Doctor doctor = new Doctor(
                 input.name(),
                 input.email(),
+                input.phone(),
                 input.crm(),
                 Specialty.valueOf(input.specialty().toString()),
                 new Address(

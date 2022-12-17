@@ -19,20 +19,28 @@ public class DoctorRepositoryJpa implements DoctorRepository {
 
     public Doctor create(Doctor entity) {
         DoctorModel saved = this.doctorRepo.save(new DoctorModel(entity));
-        Doctor result = new Doctor(
-                saved.getName(),
-                saved.getEmail(),
-                saved.getCrm(),
-                saved.getSpecialty(),
+
+        return this.toEntity(saved);
+    }
+
+    private Doctor toEntity(DoctorModel model) {
+        Doctor entity = new Doctor(
+                model.getName(),
+                model.getEmail(),
+                model.getPhone(),
+                model.getCrm(),
+                model.getSpecialty(),
                 new Address(
-                        saved.getAddress().getStreet(),
-                        saved.getAddress().getNeighborhood(),
-                        saved.getAddress().getZip(),
-                        saved.getAddress().getCity(),
-                        saved.getAddress().getState(),
-                        saved.getAddress().getNumber(),
-                        saved.getAddress().getComplement()));
-        result.setId(UUID.fromString(saved.getId()));
-        return result;
+                        model.getAddress().getStreet(),
+                        model.getAddress().getNeighborhood(),
+                        model.getAddress().getZip(),
+                        model.getAddress().getCity(),
+                        model.getAddress().getState(),
+                        model.getAddress().getNumber(),
+                        model.getAddress().getComplement()));
+
+        entity.setId(UUID.fromString(model.getId()));
+
+        return entity;
     }
 }

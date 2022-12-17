@@ -4,6 +4,7 @@ import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.domain.entities.Address;
 
 @Embeddable
 @Getter
@@ -24,7 +25,7 @@ public class AddressModel {
 
     private String complement;
 
-    public AddressModel(med.voll.api.domain.entities.Address data) {
+    public AddressModel(Address data) {
         this.street = data.getStreet();
         this.neighborhood = data.getNeighborhood();
         this.zip = data.getZip();

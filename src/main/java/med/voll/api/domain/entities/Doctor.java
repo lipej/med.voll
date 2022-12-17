@@ -16,15 +16,18 @@ public class Doctor {
 
     private String email;
 
+    private String phone;
+
     private String crm;
 
     private Specialty specialty;
 
     private Address address;
 
-    public Doctor(String name, String email, String crm, Specialty specialty, Address address) {
+    public Doctor(String name, String email, String phone, String crm, Specialty specialty, Address address) {
         this.name = name;
         this.email = email;
+        this.phone = phone;
         this.crm = crm;
         this.specialty = specialty;
         this.address = address;

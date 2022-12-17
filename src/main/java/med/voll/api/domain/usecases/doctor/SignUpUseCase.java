@@ -16,5 +16,6 @@ public class SignUpUseCase implements BaseUseCase<Doctor, String> {
     @Override
     public String execute(Doctor input) {
         return this.doctorRepository.create(input).getId().toString();
+
     }
 }
