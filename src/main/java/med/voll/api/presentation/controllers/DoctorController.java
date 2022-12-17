@@ -30,7 +30,7 @@ public class DoctorController {
                 input.email(),
                 input.phone(),
                 input.crm(),
-                Specialty.valueOf(input.specialty().toString()),
+                Specialty.valueOf(input.specialty().toString().toUpperCase()),
                 new Address(
                         input.address().street(),
                         input.address().neighborhood(),
