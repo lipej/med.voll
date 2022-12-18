@@ -1,18 +1,23 @@
 package med.voll.api.domain.usecases.doctor;
 
 import med.voll.api.domain.entities.Doctor;
+import med.voll.api.domain.entities.commons.Page;
 import med.voll.api.domain.repositories.DoctorRepository;
+
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class SignUpUseCase {
+public class ListUseCase {
     private final DoctorRepository doctorRepository;
 
-    public SignUpUseCase(DoctorRepository doctorRepository) {
+    public ListUseCase(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
     }
 
-    public String execute(Doctor input) {
-        return this.doctorRepository.create(input).getId().toString();
+    public Page<List<Doctor>> execute(int limit, int page, String order) {
+        return doctorRepository.listAll(limit, page, order);
     }
+
 }

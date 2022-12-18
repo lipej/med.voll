@@ -1,4 +1,4 @@
-package med.voll.api.domain.entities;
+package med.voll.api.domain.entities.commons;
 
 import lombok.Getter;
 
