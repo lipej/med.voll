@@ -2,6 +2,7 @@ package med.voll.api.domain.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import med.voll.api.domain.entities.commons.Address;
 import med.voll.api.domain.entities.enums.Specialty;
 
 import java.util.UUID;
