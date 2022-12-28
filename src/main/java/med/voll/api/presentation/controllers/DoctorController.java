@@ -59,7 +59,7 @@ public class DoctorController {
     public PaginatedOutput<List<DoctorOutput>> list(
             @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
             @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(value = "order", required = false, defaultValue = "") String order) {
+            @RequestParam(value = "order", required = false, defaultValue = "email") String order) {
         var result = listUseCase.execute(limit, page, order);
 
         return new PaginatedOutput<List<DoctorOutput>>(page, limit, result.getTotal(),
