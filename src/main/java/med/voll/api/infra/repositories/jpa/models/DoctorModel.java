@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import med.voll.api.domain.entities.Doctor;
 import med.voll.api.domain.entities.enums.Specialty;
 
@@ -28,6 +29,9 @@ public class DoctorModel {
 
     @Embedded
     private AddressModel address;
+
+    @Setter
+    private String deletedAt = null;
 
     public DoctorModel(Doctor data) {
         this.id = data.getId().toString();
