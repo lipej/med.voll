@@ -12,10 +12,10 @@ import med.voll.api.domain.entities.Doctor;
 import med.voll.api.domain.repositories.DoctorRepository;
 import med.voll.api.infra.repositories.fake.DoctorRepositoryFake;
 
-public class ListUseCadeTest {
+public class ListDoctorUseCaseTest {
     private List<Doctor> db;
     private DoctorRepository repo;
-    private ListUseCase useCase;
+    private ListDoctorUseCase useCase;
     private Doctor doc1;
     private Doctor doc2;
 
@@ -23,7 +23,7 @@ public class ListUseCadeTest {
     void setup() {
         db = new ArrayList<Doctor>();
         repo = new DoctorRepositoryFake(db);
-        useCase = new ListUseCase(repo);
+        useCase = new ListDoctorUseCase(repo);
         doc1 = new Doctor("Testing", null, null, null, null, null);
         doc2 = new Doctor("Dr. Testing", null, null, null, null, null);
         db.add(doc1);
