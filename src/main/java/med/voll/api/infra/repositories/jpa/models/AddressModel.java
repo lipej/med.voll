@@ -34,4 +34,21 @@ public class AddressModel {
         this.number = data.getNumber();
         this.complement = data.getComplement();
     }
+
+    public void update(Address address) {
+        if (address.getStreet() != null)
+            this.street = address.getStreet();
+        if (address.getNeighborhood() != null)
+            this.neighborhood = address.getNeighborhood();
+        if (address.getZip() != null)
+            this.zip = address.getZip();
+        if (address.getCity() != null)
+            this.city = address.getCity();
+        if (address.getState() != null)
+            this.state = address.getState();
+        if (address.getNumber() != null)
+            this.number = address.getNumber();
+        if (address.getComplement() != null)
+            this.complement = address.getComplement();
+    }
 }
