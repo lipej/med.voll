@@ -5,10 +5,10 @@ import med.voll.api.domain.repositories.DoctorRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SignUpUseCase {
+public class SignUpDoctorUseCase {
     private final DoctorRepository doctorRepository;
 
-    public SignUpUseCase(DoctorRepository doctorRepository) {
+    public SignUpDoctorUseCase(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
     }
 

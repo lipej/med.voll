@@ -13,10 +13,12 @@ public class Doctor {
     @Setter
     private UUID id = UUID.randomUUID();
 
+    @Setter
     private String name;
 
     private String email;
 
+    @Setter
     private String phone;
 
     private String crm;

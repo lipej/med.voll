@@ -7,10 +7,10 @@ import med.voll.api.domain.exceptions.NotFoundException;
 import med.voll.api.domain.repositories.DoctorRepository;
 
 @Service
-public class UpdateUseCase {
+public class UpdateDoctorUseCase {
     private final DoctorRepository doctorRepository;
 
-    public UpdateUseCase(DoctorRepository doctorRepository) {
+    public UpdateDoctorUseCase(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
     }
 

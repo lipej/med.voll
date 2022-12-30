@@ -4,9 +4,9 @@ import med.voll.api.domain.entities.Doctor;
 import med.voll.api.domain.entities.commons.Address;
 import med.voll.api.domain.entities.enums.Specialty;
 import med.voll.api.domain.exceptions.NotFoundException;
-import med.voll.api.domain.usecases.doctor.ListUseCase;
-import med.voll.api.domain.usecases.doctor.SignUpUseCase;
-import med.voll.api.domain.usecases.doctor.UpdateUseCase;
+import med.voll.api.domain.usecases.doctor.ListDoctorUseCase;
+import med.voll.api.domain.usecases.doctor.SignUpDoctorUseCase;
+import med.voll.api.domain.usecases.doctor.UpdateDoctorUseCase;
 import med.voll.api.infra.http.controllers.inputs.doctor.*;
 import med.voll.api.infra.http.controllers.output.commons.IdOutput;
 import med.voll.api.infra.http.controllers.output.commons.PaginatedOutput;
@@ -30,11 +30,12 @@ import java.util.UUID;
 @RequestMapping("doctors")
 public class DoctorController {
 
-    private final SignUpUseCase signUpUseCase;
-    private final ListUseCase listUseCase;
-    private final UpdateUseCase updateUseCase;
+    private final SignUpDoctorUseCase signUpUseCase;
+    private final ListDoctorUseCase listUseCase;
+    private final UpdateDoctorUseCase updateUseCase;
 
-    public DoctorController(SignUpUseCase signUpUseCase, ListUseCase listUseCase, UpdateUseCase updateUseCase) {
+    public DoctorController(SignUpDoctorUseCase signUpUseCase, ListDoctorUseCase listUseCase,
+            UpdateDoctorUseCase updateUseCase) {
         this.signUpUseCase = signUpUseCase;
         this.listUseCase = listUseCase;
         this.updateUseCase = updateUseCase;

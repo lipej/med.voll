@@ -37,16 +37,44 @@ public class DoctorRepositoryFake implements DoctorRepository {
 
     @Override
     public Doctor update(Doctor doctor) throws NotFoundException {
-        // Doctor doctorToUpdate = this.db.stream().filter(it ->
-        // doctor.getId().toString().equals(it.getId().toString()))
-        // .findAny().orElse(null);
+        Doctor doctorToUpdate = this.db.stream().filter(it -> doctor.getId().equals(it.getId()))
+                .findAny().orElse(null);
 
-        // if (doctorToUpdate == null)
-        // throw new NotFoundException();
+        if (doctorToUpdate == null)
+            throw new NotFoundException();
 
-        // doctorToUpdate.setName() = doctor.getName();
+        if (doctor.getName() != null)
+            doctorToUpdate.setName(doctor.getName());
 
-        return null;
+        if (doctor.getPhone() != null)
+            doctorToUpdate.setPhone(doctor.getPhone());
+
+        if (doctor.getAddress() != null) {
+            var newAddress = doctor.getAddress();
+
+            if (newAddress.getStreet() != null)
+                doctorToUpdate.getAddress().setStreet(doctor.getAddress().getStreet());
+
+            if (newAddress.getNeighborhood() != null)
+                doctorToUpdate.getAddress().setNeighborhood(newAddress.getNeighborhood());
+
+            if (newAddress.getZip() != null)
+                doctorToUpdate.getAddress().setZip(newAddress.getZip());
+
+            if (newAddress.getCity() != null)
+                doctorToUpdate.getAddress().setCity(newAddress.getCity());
+
+            if (newAddress.getState() != null)
+                doctorToUpdate.getAddress().setState(newAddress.getState());
+
+            if (newAddress.getNumber() != null)
+                doctorToUpdate.getAddress().setNumber(newAddress.getNumber());
+
+            if (newAddress.getComplement() != null)
+                doctorToUpdate.getAddress().setComplement(newAddress.getComplement());
+        }
+
+        return doctorToUpdate;
     }
 
 }
