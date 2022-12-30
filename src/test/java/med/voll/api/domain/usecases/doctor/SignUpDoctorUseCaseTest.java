@@ -5,6 +5,8 @@ import med.voll.api.domain.entities.commons.Address;
 import med.voll.api.domain.entities.enums.Specialty;
 import med.voll.api.domain.repositories.DoctorRepository;
 import med.voll.api.infra.repositories.fake.DoctorRepositoryFake;
+import med.voll.api.infra.repositories.fake.models.DoctorModel;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +16,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SignUpDoctorUseCaseTest {
-    private List<Doctor> db;
+    private List<DoctorModel> db;
     private DoctorRepository repo;
     private SignUpDoctorUseCase useCase;
 
     @BeforeEach
     void createInstances() {
-        db = new ArrayList<Doctor>();
+        db = new ArrayList<DoctorModel>();
         repo = new DoctorRepositoryFake(db);
         useCase = new SignUpDoctorUseCase(repo);
     }

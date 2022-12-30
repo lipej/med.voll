@@ -4,6 +4,7 @@ import med.voll.api.domain.entities.Doctor;
 import med.voll.api.domain.entities.commons.Address;
 import med.voll.api.domain.entities.enums.Specialty;
 import med.voll.api.domain.exceptions.NotFoundException;
+import med.voll.api.domain.usecases.doctor.DeleteDoctorUseCase;
 import med.voll.api.domain.usecases.doctor.ListDoctorUseCase;
 import med.voll.api.domain.usecases.doctor.SignUpDoctorUseCase;
 import med.voll.api.domain.usecases.doctor.UpdateDoctorUseCase;
@@ -13,7 +14,9 @@ import med.voll.api.infra.http.controllers.output.commons.PaginatedOutput;
 import med.voll.api.infra.http.controllers.output.doctor.DoctorOutput;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,12 +36,14 @@ public class DoctorController {
     private final SignUpDoctorUseCase signUpUseCase;
     private final ListDoctorUseCase listUseCase;
     private final UpdateDoctorUseCase updateUseCase;
+    private final DeleteDoctorUseCase deleteUseCase;
 
     public DoctorController(SignUpDoctorUseCase signUpUseCase, ListDoctorUseCase listUseCase,
-            UpdateDoctorUseCase updateUseCase) {
+            UpdateDoctorUseCase updateUseCase, DeleteDoctorUseCase deleteUseCase) {
         this.signUpUseCase = signUpUseCase;
         this.listUseCase = listUseCase;
         this.updateUseCase = updateUseCase;
+        this.deleteUseCase = deleteUseCase;
     }
 
     @PostMapping
@@ -73,8 +78,9 @@ public class DoctorController {
                 result.getData().stream().map(DoctorOutput::new).toList());
     }
 
-    @PutMapping
-    public DoctorOutput update(@Valid @RequestBody DoctorUpdateInput input) throws NotFoundException {
+    @PutMapping(value = "/{id}")
+    public DoctorOutput update(@Valid @RequestBody DoctorUpdateInput input, @PathVariable("id") String id)
+            throws NotFoundException {
         Doctor doctor = new Doctor(
                 input.name(),
                 null,
@@ -90,8 +96,13 @@ public class DoctorController {
                         input.address().number(),
                         input.address().complement()));
 
-        doctor.setId(UUID.fromString(input.id()));
+        doctor.setId(UUID.fromString(id));
 
         return new DoctorOutput(updateUseCase.execute(doctor));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable("id") String id) throws NotFoundException {
+        this.deleteUseCase.execute(id);
     }
 }

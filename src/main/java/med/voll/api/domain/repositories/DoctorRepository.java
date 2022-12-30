@@ -12,4 +12,6 @@ public interface DoctorRepository {
     Page<List<Doctor>> listAll(int limit, int page, String order);
 
     Doctor update(Doctor id) throws NotFoundException;
+
+    void delete(String id) throws NotFoundException;
 }

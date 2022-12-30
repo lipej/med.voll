@@ -9,11 +9,13 @@ import med.voll.api.infra.repositories.jpa.interfaces.IDoctorRepositoryJpa;
 import med.voll.api.infra.repositories.jpa.models.DoctorModel;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityNotFoundException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,21 +35,42 @@ public class DoctorRepositoryJpa implements DoctorRepository {
 
     @Override
     public Page<List<Doctor>> listAll(int limit, int page, String order) {
-        var doctors = this.doctorRepo.findAll(PageRequest.of(page, limit, Sort.Direction.ASC, order.split(",")));
+        Pageable pageable = PageRequest.of(page, limit, Sort.Direction.ASC, order.split(","));
+        var doctors = this.doctorRepo
+                .findByDeletedAtIsNull(pageable);
         return new Page<List<Doctor>>(
-                doctors.getTotalElements(),
-                doctors.toList().stream().map(this::toEntity).toList());
+                doctors.size(),
+                doctors.stream().map(this::toEntity).toList());
     }
 
     public Doctor update(Doctor doctor) throws NotFoundException {
         try {
             DoctorModel doctorToUpdate = this.doctorRepo.getReferenceById(doctor.getId().toString());
 
-            doctorToUpdate.update(doctor);
-
-            this.doctorRepo.save(doctorToUpdate);
+            if (doctorToUpdate.getDeletedAt() == null) {
+                doctorToUpdate.update(doctor);
+                this.doctorRepo.save(doctorToUpdate);
+            }
 
             return this.toEntity(doctorToUpdate);
+        } catch (Exception e) {
+            if (e instanceof EntityNotFoundException) {
+                throw new NotFoundException();
+            }
+
+            throw e;
+        }
+    }
+
+    public void delete(String id) throws NotFoundException {
+        try {
+            DoctorModel doctorToUpdate = this.doctorRepo.getReferenceById(id);
+
+            if (doctorToUpdate.getDeletedAt() == null) {
+                doctorToUpdate.setDeletedAt(LocalDate.now().toString());
+                this.doctorRepo.save(doctorToUpdate);
+            }
+
         } catch (Exception e) {
             if (e instanceof EntityNotFoundException) {
                 throw new NotFoundException();
