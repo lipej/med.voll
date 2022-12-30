@@ -1,4 +1,4 @@
-package med.voll.api.presentation.controllers.output.doctor;
+package med.voll.api.infra.http.controllers.output.doctor;
 
 import med.voll.api.domain.entities.Doctor;
 

@@ -38,4 +38,13 @@ public class DoctorModel {
         this.specialty = data.getSpecialty();
         this.address = new AddressModel(data.getAddress());
     }
+
+    public void update(Doctor data) {
+        if (data.getName() != null)
+            this.name = data.getName();
+        if (data.getPhone() != null)
+            this.phone = data.getPhone();
+        if (data.getAddress() != null)
+            this.address.update(data.getAddress());
+    }
 }

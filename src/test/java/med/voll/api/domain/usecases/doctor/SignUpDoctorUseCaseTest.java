@@ -13,16 +13,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SignUpUseCaseTest {
+public class SignUpDoctorUseCaseTest {
     private List<Doctor> db;
     private DoctorRepository repo;
-    private SignUpUseCase useCase;
+    private SignUpDoctorUseCase useCase;
 
     @BeforeEach
     void createInstances() {
         db = new ArrayList<Doctor>();
         repo = new DoctorRepositoryFake(db);
-        useCase = new SignUpUseCase(repo);
+        useCase = new SignUpDoctorUseCase(repo);
     }
 
     @Test

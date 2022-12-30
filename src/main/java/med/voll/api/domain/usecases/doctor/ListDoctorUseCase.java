@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ListUseCase {
+public class ListDoctorUseCase {
     private final DoctorRepository doctorRepository;
 
-    public ListUseCase(DoctorRepository doctorRepository) {
+    public ListDoctorUseCase(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
     }
 
