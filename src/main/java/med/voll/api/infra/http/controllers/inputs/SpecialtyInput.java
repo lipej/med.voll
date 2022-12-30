@@ -1,4 +1,4 @@
-package med.voll.api.presentation.controllers.inputs;
+package med.voll.api.infra.http.controllers.inputs;
 
 public enum SpecialtyInput {
     orthopedics,

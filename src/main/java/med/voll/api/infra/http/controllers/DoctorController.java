@@ -1,4 +1,4 @@
-package med.voll.api.presentation.controllers;
+package med.voll.api.infra.http.controllers;
 
 import med.voll.api.domain.entities.Doctor;
 import med.voll.api.domain.entities.commons.Address;
@@ -7,10 +7,10 @@ import med.voll.api.domain.exceptions.NotFoundException;
 import med.voll.api.domain.usecases.doctor.ListUseCase;
 import med.voll.api.domain.usecases.doctor.SignUpUseCase;
 import med.voll.api.domain.usecases.doctor.UpdateUseCase;
-import med.voll.api.presentation.controllers.inputs.doctor.*;
-import med.voll.api.presentation.controllers.output.commons.IdOutput;
-import med.voll.api.presentation.controllers.output.commons.PaginatedOutput;
-import med.voll.api.presentation.controllers.output.doctor.DoctorOutput;
+import med.voll.api.infra.http.controllers.inputs.doctor.*;
+import med.voll.api.infra.http.controllers.output.commons.IdOutput;
+import med.voll.api.infra.http.controllers.output.commons.PaginatedOutput;
+import med.voll.api.infra.http.controllers.output.doctor.DoctorOutput;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
