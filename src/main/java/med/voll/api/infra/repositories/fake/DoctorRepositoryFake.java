@@ -36,7 +36,7 @@ public class DoctorRepositoryFake implements DoctorRepository {
         }
 
         return new Page<List<Doctor>>(this.db.size(),
-                this.db.stream().filter(it -> it.getDeletedAt().equals(null)).skip(page * limit).limit(limit)
+                this.db.stream().filter(it -> it.getDeletedAt() == null).skip(page * limit).limit(limit)
                         .map(this::toEntity).toList());
     }
 
