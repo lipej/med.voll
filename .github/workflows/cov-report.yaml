@@ -1,0 +1,33 @@
+name: cov report
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "adopt"
+
+      - name: run test
+        run: |
+          ./mvnw test
+
+      - name: run jacoco
+        run: |
+          ./mvnw jacoco:report
+
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.3
+        with:
+          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 40
+          min-coverage-changed-files: 60
