@@ -15,19 +15,20 @@ import med.voll.api.domain.entities.enums.Specialty;
 import med.voll.api.domain.exceptions.NotFoundException;
 import med.voll.api.domain.repositories.DoctorRepository;
 import med.voll.api.infra.repositories.fake.DoctorRepositoryFake;
+import med.voll.api.infra.repositories.fake.models.DoctorModel;
 
 public class UpdateDoctorUseCaseTest {
-    private List<Doctor> db;
+    private List<DoctorModel> db;
     private Doctor doc1;
     private DoctorRepository repo;
     private UpdateDoctorUseCase useCase;
 
     @BeforeEach
     void createInstances() {
-        db = new ArrayList<Doctor>();
+        db = new ArrayList<DoctorModel>();
         doc1 = new Doctor("Testing", "doctor@example.com", "+5511900000000", "123456", Specialty.CARDIOLOGY,
                 new Address("Rua Luchen", "Liberdade", "11000000", "São Paulo", "SP", "123", "BLOCO 9, CASA 20"));
-        db.add(doc1);
+        db.add(new DoctorModel(doc1));
         repo = new DoctorRepositoryFake(db);
         useCase = new UpdateDoctorUseCase(repo);
     }
